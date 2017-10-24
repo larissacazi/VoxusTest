@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "348738872739",
+    "firebase_url": "https://dashboard-ebf17.firebaseio.com",
+    "project_id": "dashboard-ebf17",
+    "storage_bucket": "dashboard-ebf17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348738872739:android:6f55d82dd173f4c9",
+        "android_client_info": {
+          "package_name": "zimmermann.larissa.dashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348738872739-04u3f3hbl4uu9v1lb7fl6mlq9vnqglgi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "zimmermann.larissa.dashboard",
+            "certificate_hash": "1b324f49f41501b33a97253da81a22f60f6db20d"
+          }
+        },
+        {
+          "client_id": "348738872739-tai5abmb9s706blrm4jr051vginjig3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeVwkDiHxdKguReX8YssSQJ_7yEtTlLsE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348738872739-tai5abmb9s706blrm4jr051vginjig3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
