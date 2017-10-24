@@ -17,4 +17,10 @@
     <string name="sign_in">SIGN IN</string>
     <string name="google_sign_in">Google SIGN IN</string>
     <string name="loading">Loading...</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

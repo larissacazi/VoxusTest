@@ -31,6 +31,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.ProviderQueryResult;
 
+import static java.security.AccessController.getContext;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -120,7 +122,8 @@ public class LoginActivity extends BaseActivity implements
                     Toast.makeText(LoginActivity.this, "Success on Google Authentication.", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = mAuth.getCurrentUser();
 
-                    //Call the other activity
+                    //Call Dashboard activity
+                    callDashboard();
 
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -171,7 +174,8 @@ public class LoginActivity extends BaseActivity implements
                     FirebaseUser user = mAuth.getCurrentUser();
                     Toast.makeText(LoginActivity.this, "Success on Authentication.", Toast.LENGTH_SHORT).show();
 
-                    //Call other activity
+                    //Call Dashboard activity
+                    callDashboard();
                 } else {
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -302,6 +306,11 @@ public class LoginActivity extends BaseActivity implements
     public void hideKeyboard() {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(LoginActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public void callDashboard() {
+        Intent myIntent = new Intent(LoginActivity.this, DashboardActivity.class);
+        startActivity(myIntent);
     }
 
     @Override
