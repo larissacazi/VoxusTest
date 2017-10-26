@@ -69,16 +69,6 @@ public class LoginActivity extends BaseActivity implements
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void signOut() {
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-
-                    }
-                });
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -95,6 +85,9 @@ public class LoginActivity extends BaseActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Log.d(TAG, "Display: " + acct.getDisplayName());
+
+            mGoogleApiClientSingleton.setPersonName(acct.getGivenName() + " " + acct.getFamilyName());
+            mGoogleApiClientSingleton.setPersonEmail(acct.getEmail());
 
             //Call Dashboard Activity
             Log.d(TAG, "Call Dashboard Activity.");
@@ -114,7 +107,6 @@ public class LoginActivity extends BaseActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        signOut();
     }
 
     @Override
@@ -123,6 +115,7 @@ public class LoginActivity extends BaseActivity implements
 
         if(i == R.id.google_sign_in) {
             Log.d(TAG, "GOOGLE Email sign in button pressed!");
+            showProgressDialog();
             signIn();
         }
     }

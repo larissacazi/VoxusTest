@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInApi;
@@ -31,24 +33,19 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private GoogleAPiClientSingleton mGoogleApiClientSingleton;
     private GoogleApiClient mGoogleApiClient;
 
+    private TextView mUserName;
+    private TextView mUserEmail;
+
+    private S3Manager s3Manager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mGoogleApiClientSingleton = GoogleAPiClientSingleton.getInstance(mGoogleApiClient);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,9 +56,25 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
+        //Access to Google API Client
         Log.d(TAG, "Dashboard::enter!");
+        mGoogleApiClientSingleton = GoogleAPiClientSingleton.getInstance(mGoogleApiClient);
         mGoogleApiClient = mGoogleApiClientSingleton.getGoogleApiClient();
         Log.d(TAG, "Display: " + mGoogleApiClient.isConnected());
+
+        //Configure user
+       // String name = mGoogleApiClientSingleton.getPersonName();
+        //String email =  mGoogleApiClientSingleton.getPersonEmail();
+        //mUserName = (TextView)findViewById(R.id.personName);
+        //mUserEmail = (TextView)findViewById(R.id.emailTextView);
+       // mUserName.setText(name);
+       // mUserEmail.append(email);
+
+        s3Manager = new S3Manager();
+        s3Manager.createBucket();
+
     }
 
     @Override
@@ -119,14 +132,23 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         return true;
     }
 
-    private void signOut() {
-        // Google sign out
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
+    //---------------------------- Add functions here! ----------------------------//
 
-                    }
-                });
+    private void signOut() {//TODO
+        // Google sign out
+        if(mGoogleApiClient.isConnected()) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                @Override
+                public void onResult(@NonNull Status status) {
+                    Log.d(TAG, "signOut::Return to the Sign-In Activity.");
+                    Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
+        else {
+            Log.d(TAG, "signOut::mGoogleApiClient is not connected!");
+        }
     }
 }

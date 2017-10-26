@@ -25,4 +25,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="server_client_id">348738872739-ttvd57s7veiigiofddb2c1d73r7nrgia.apps.googleusercontent.com</string>
+    <string name="taskName">Nome da Task:</string>
+    <string name="taskPriority">Prioridade da Task (1 a 5):</string>
+    <string name="addAttachment">Adicionar anexos:</string>
 </resources>

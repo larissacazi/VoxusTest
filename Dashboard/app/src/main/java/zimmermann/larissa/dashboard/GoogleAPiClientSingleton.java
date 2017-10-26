@@ -13,6 +13,9 @@ public class GoogleAPiClientSingleton {
 
     private static GoogleApiClient mGoogleApiClient = null;
 
+    private String personName;
+    private String personEmail;
+
     private GoogleAPiClientSingleton() {
     }
 
@@ -26,5 +29,21 @@ public class GoogleAPiClientSingleton {
 
     public GoogleApiClient getGoogleApiClient(){
         return mGoogleApiClient;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getPersonEmail() {
+        return personEmail;
+    }
+
+    public void setPersonEmail(String personEmail) {
+        this.personEmail = personEmail;
     }
 }
